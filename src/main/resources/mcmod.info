@@ -1,0 +1,21 @@
+[
+{
+  "modid": "Talismans 2",
+  "name": "Talismans 2",
+  "description": "Add Talismans that give you buffs when equipped ",
+  "version": "1.1.6",
+  "url": "http://minecraft.curseforge.com/mc-mods/224434-talismans-2",
+  "updateUrl": "",
+  "authorList": [
+    "Gigabit101, Mj11jM"
+    
+  ],
+  "credits": "Nexans For the awesome Textures, HazzardKill for the Thaumonomicon Text",
+  "logoFile": "/assets/talismans2/textures/logo/logo.png",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]

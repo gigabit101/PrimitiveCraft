@@ -1,14 +1,11 @@
-[![Build Status](https://drone.io/bitbucket.org/gigabit101/talismans-2/status.png)](https://drone.io/bitbucket.org/gigabit101/talismans-2/latest)
-=========
-
-The offical repository of Talismans 2.
+The offical repository of PrimitiveCraft.
 
 
 
 Building
 =========
 
-We use ForgeGradle. There are instructions inside the 'build.gradle' file in this repository.
+I use ForgeGradle. There are instructions inside the 'build.gradle' file in this repository.
 
 
 Licence

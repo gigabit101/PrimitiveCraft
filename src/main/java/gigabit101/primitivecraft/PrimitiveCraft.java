@@ -24,7 +24,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(name = ModInfo.MODNAME, modid = ModInfo.MODID, version = ModInfo.MODVERSION)
+@Mod(name = ModInfo.MODNAME, modid = ModInfo.MODID, version = ModInfo.MODVERSION, dependencies = ModInfo.MOD_DEPENDENCUIES)
 public class PrimitiveCraft 
 {
 	@SidedProxy(clientSide = ModInfo.MOD_CLIENT_PROXY, serverSide = ModInfo.MOD_COMMON_PROXY)

@@ -1,23 +1,31 @@
 package gigabit101.primitivecraft.blocks;
 
+import java.util.List;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gigabit101.primitivecraft.client.CreativeTabPrimativeCraft;
 import gigabit101.primitivecraft.init.ModItems;
 import gigabit101.primitivecraft.lib.RenderIds;
 import gigabit101.primitivecraft.tile.TileCampfire;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import reborncore.common.util.ItemUtils;
 
-public class BlockCampfire extends BlockBase
-{	
+public class BlockCampfire extends BlockContainer
+{	    
 	public BlockCampfire(Material material)
 	{
 		super(material);
 		setBlockName("campfire");
+		setCreativeTab(CreativeTabPrimativeCraft.instance);
 	}
 	
 	@Override
@@ -32,7 +40,7 @@ public class BlockCampfire extends BlockBase
 				ItemStack input = new ItemStack(playersStack.getItem(), 1);
 				int i = 0;
 				
-		        for (i = 0; i < 4; ++i) 
+		        for (i = 0; i < 5; ++i) 
 		        {
 		        	if (tile.isItemValidForSlot(i, input))
 		        	{
@@ -49,27 +57,25 @@ public class BlockCampfire extends BlockBase
 							break;
 			        	}
 		        	}
-		        	else if(ItemUtils.isItemEqual(input, new ItemStack(ModItems.shale), true, true))
-		        	{
-		        		tile.activate();
-		        	}
 		        }
 				return true;
 			}
 		}
 		//DEBUG
-//		if(player.isSneaking() && !world.isRemote)
-//		{
-//			if(tile.getStackInSlot(0) != null)
-//				player.addChatComponentMessage(new ChatComponentText("0 " + tile.getStackInSlot(0).getDisplayName() + " " + tile.getStackInSlot(0).stackSize));
-//			if(tile.getStackInSlot(1) != null)
-//				player.addChatComponentMessage(new ChatComponentText("1 " + tile.getStackInSlot(1).getDisplayName() + " " + tile.getStackInSlot(1).stackSize));
-//			if(tile.getStackInSlot(2) != null)
-//				player.addChatComponentMessage(new ChatComponentText("2 " + tile.getStackInSlot(2).getDisplayName() + " " + tile.getStackInSlot(2).stackSize));
-//			if(tile.getStackInSlot(3) != null)
-//				player.addChatComponentMessage(new ChatComponentText("3 " + tile.getStackInSlot(3).getDisplayName() + " " + tile.getStackInSlot(3).stackSize));
-//		}
-		return true;
+		if(player.isSneaking() && !world.isRemote)
+		{
+			if(tile.getStackInSlot(0) != null)
+				player.addChatComponentMessage(new ChatComponentText("0 " + tile.getStackInSlot(0).getDisplayName() + " " + tile.getStackInSlot(0).stackSize));
+			if(tile.getStackInSlot(1) != null)
+				player.addChatComponentMessage(new ChatComponentText("1 " + tile.getStackInSlot(1).getDisplayName() + " " + tile.getStackInSlot(1).stackSize));
+			if(tile.getStackInSlot(2) != null)
+				player.addChatComponentMessage(new ChatComponentText("2 " + tile.getStackInSlot(2).getDisplayName() + " " + tile.getStackInSlot(2).stackSize));
+			if(tile.getStackInSlot(3) != null)
+				player.addChatComponentMessage(new ChatComponentText("3 " + tile.getStackInSlot(3).getDisplayName() + " " + tile.getStackInSlot(3).stackSize));
+			if(tile.getStackInSlot(4) != null)
+				player.addChatComponentMessage(new ChatComponentText("4 " + tile.getStackInSlot(4).getDisplayName() + " " + tile.getStackInSlot(4).stackSize));
+		}
+		return false;
 	}
 	
 	@Override

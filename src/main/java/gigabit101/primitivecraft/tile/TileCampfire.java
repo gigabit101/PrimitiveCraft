@@ -10,16 +10,21 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import reborncore.common.util.Inventory;
 
 public class TileCampfire extends TileEntity implements IInventory
 {	
-	public Inventory inventory = new Inventory(4, "TileCampfire", 8);
+	public Inventory inventory = new Inventory(5, "TileCampfire", 8);
 	public int rockSlotID = 0;
 	public int stickSlotID = 1;
 	public int jugSlotID = 2;
 	public int spitSlotID = 3;
+	public int fireSlodID = 4;
+	public boolean hasFire;
 	
 	@Override
 	public void updateEntity() 
@@ -32,19 +37,14 @@ public class TileCampfire extends TileEntity implements IInventory
 	
 	public boolean isActive()
 	{
-		if(getStackInSlot(rockSlotID) != null && getStackInSlot(stickSlotID) != null)
+		if(getStackInSlot(rockSlotID) != null && getStackInSlot(stickSlotID) != null && getStackInSlot(fireSlodID) != null)
 		{
-			if(getStackInSlot(rockSlotID).stackSize == 8 && getStackInSlot(stickSlotID).stackSize == 8)
+			if(getStackInSlot(rockSlotID).stackSize == 8 && getStackInSlot(stickSlotID).stackSize == 8 && getStackInSlot(fireSlodID).stackSize == 1)
 			{
 				return true;
 			}
 		}
 		return false;
-	}
-	
-	public void activate()
-	{
-		worldObj.setBlock(xCoord + 1, yCoord, zCoord, Blocks.fire);
 	}
 	
 	@Override
@@ -59,6 +59,20 @@ public class TileCampfire extends TileEntity implements IInventory
 	{
 		super.readFromNBT(data);
 		inventory.readFromNBT(data);
+	}
+	
+	public Packet getDescriptionPacket() 
+	{
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		writeToNBT(nbtTag);
+		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) 
+	{
+		worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
+		readFromNBT(packet.func_148857_g());
 	}
 
 	@Override
@@ -143,6 +157,10 @@ public class TileCampfire extends TileEntity implements IInventory
 			return true;
 		}
 		else if(itemstack.getItem() == Item.getItemFromBlock(ModBlocks.hardjug) && i == this.jugSlotID)
+		{
+			return true;
+		}
+		else if(itemstack.getItem() == ModItems.shale && i == this.fireSlodID && getStackInSlot(this.fireSlodID) == null)
 		{
 			return true;
 		}

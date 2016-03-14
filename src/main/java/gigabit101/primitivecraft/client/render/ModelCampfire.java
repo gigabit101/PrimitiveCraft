@@ -6,6 +6,9 @@ import net.minecraft.block.BlockFire;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 
 public class ModelCampfire extends ModelBase
@@ -54,6 +57,7 @@ public class ModelCampfire extends ModelBase
     public boolean hasJug;
     public int sticks;
     public int stones;
+    public int meta;
 
     public ModelCampfire() {
         this.textureWidth = 32;
@@ -323,18 +327,35 @@ public class ModelCampfire extends ModelBase
     
     public void renderFire(float f5)
     {
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		
-//		Minecraft.getMinecraft().renderEngine.bindTexture(testLog);
-//		
-//		this.spitStand1.render(f5);
-//		this.spitStand2.render(f5);
-//		this.spitRod.render(f5);
-		
-		GL11.glDisable(GL11.GL_BLEND);
-		
-		GL11.glPopMatrix();
+    	if(isActive)
+    	{
+			GL11.glPushMatrix();
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GL11.glRotatef(180, 0, 0, 5);
+			if(!hasJug)
+			{
+				GL11.glTranslatef(0f, -0.8F, 0f);
+			}
+			else
+			{
+				GL11.glTranslatef(0f, -1.2F, 0f);
+			}
+			if(hasJug)
+			{
+				GL11.glScalef(1F, 0.5F, 1F);
+			}
+			
+			Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
+	        
+	    	RenderBlocks renderBlocks = RenderBlocks.getInstance();
+	        renderBlocks.setOverrideBlockTexture(Blocks.fire.getFireIcon(1));
+	        renderBlocks.renderBlockAsItem(Blocks.torch, 1, 2.0f);
+	
+	        renderBlocks.clearOverrideBlockTexture();
+			
+			GL11.glDisable(GL11.GL_BLEND);
+			GL11.glPopMatrix();
+    	}
     }
 }

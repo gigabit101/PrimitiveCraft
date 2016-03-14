@@ -6,6 +6,7 @@ import gigabit101.primitivecraft.config.ConfigPrimitiveCraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ModRecipes 
 {
@@ -37,6 +38,8 @@ public class ModRecipes
 	{
 		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(Blocks.gravel), new ItemStack(Blocks.sand), new ItemStack(Blocks.cobblestone));
 		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(Blocks.sand), null, new ItemStack(Blocks.gravel));     
-		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(ModItems.oredust), null, new ItemStack(Blocks.iron_ore));
+		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(ModItems.oredust, 2), null, new ItemStack(Blocks.iron_ore));
+		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(ModItems.oredust, 2, 1), null, new ItemStack(Blocks.gold_ore));
+		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(Items.string, 4), null, new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE));
 	}
 }

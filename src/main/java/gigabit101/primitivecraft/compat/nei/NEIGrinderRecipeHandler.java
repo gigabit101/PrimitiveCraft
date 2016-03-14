@@ -23,6 +23,7 @@ public class NEIGrinderRecipeHandler extends TemplateRecipeHandler
 		public List <PositionedStack> inputs = new ArrayList<PositionedStack>();
 		public PositionedStack output1;
 		public PositionedStack output2;
+		//TODO
 		public int chance;
 		
 		public CachedGrinderRecipe(RecipeGrinder recipe) 

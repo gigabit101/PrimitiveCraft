@@ -16,6 +16,7 @@ import gigabit101.primitivecraft.event.EventDrops;
 import gigabit101.primitivecraft.init.ModBlocks;
 import gigabit101.primitivecraft.init.ModItems;
 import gigabit101.primitivecraft.init.ModRecipes;
+import gigabit101.primitivecraft.init.ModWorldGen;
 import gigabit101.primitivecraft.lib.ModInfo;
 import gigabit101.primitivecraft.proxy.CommonProxy;
 import gigabit101.primitivecraft.world.WorldGenStones;
@@ -60,7 +61,7 @@ public class PrimitiveCraft
 		CompatHandler.init(event);
 		//Register Leave drops
 		MinecraftForge.EVENT_BUS.register(EventDrops.instancemain);
-		//Register World gen
-		MinecraftForge.TERRAIN_GEN_BUS.register(WorldGenStones.instancemain);
+		//Register Mod World Gen
+		ModWorldGen.init();
 	}
 }

@@ -9,10 +9,11 @@ public class ConfigPrimitiveCraft
 	private static ConfigPrimitiveCraft instance = null;
 	public static String CATEGORY_RECIPE = "RECIPE";
 	public static String CATEGORY_TWEAKS = "TWEAKS";
-
+	public static String CATEGORY_WORLD = "WORLD";
 	
 	public static boolean enableGrinder;
 	public static boolean snowballsStack64;
+	public static boolean genrocks;
 	
 	public static Configuration config;
 	
@@ -50,8 +51,13 @@ public class ConfigPrimitiveCraft
     
     public static void Configs() 
     {
+    	//Recipe
         enableGrinder = config.get(CATEGORY_RECIPE,"Enable Grinder",
                 true,"set to false to remove recipe from the grinder").getBoolean();
+        //World
+        genrocks = config.get(CATEGORY_WORLD,"Enable Rocks Worldgen",
+                true,"set to false to disable rocks from generating").getBoolean();
+        //Tweaks
         snowballsStack64 = config.get(CATEGORY_TWEAKS,"Enable Snowballs to stack to 64",
                 false,"set to false to remove recipe from the grinder").getBoolean();
         

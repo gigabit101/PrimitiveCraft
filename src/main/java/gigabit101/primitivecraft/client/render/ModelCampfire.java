@@ -242,46 +242,67 @@ public class ModelCampfire extends ModelBase
     
     public void renderStones1(float f5)
     {
-		GL11.glPushMatrix();	
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		Minecraft.getMinecraft().renderEngine.bindTexture(testStone);
-		
-		this.sideRock1.render(f5);
-		this.sideRock3.render(f5);
-		this.sideRock5.render(f5);
-		this.sideRock7.render(f5);
-		this.sideRock9.render(f5);
-		this.sideRock11.render(f5);
-		this.sideRock13.render(f5);
-		this.sideRock15.render(f5);
-    	
-		GL11.glDisable(GL11.GL_BLEND);
-		
-		GL11.glPopMatrix();
+    	if(stones != 0)
+    	{
+			GL11.glPushMatrix();	
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			Minecraft.getMinecraft().renderEngine.bindTexture(testStone);
+			if(stones >= 1)
+				this.sideRock1.render(f5);
+			if(stones >= 2)
+				this.sideRock3.render(f5);
+			if(stones >= 3)
+				this.sideRock5.render(f5);
+			if(stones >= 4)
+				this.sideRock7.render(f5);
+			if(stones >= 5)
+				this.sideRock9.render(f5);
+			if(stones >= 6)
+				this.sideRock11.render(f5);
+			if(stones >= 7)
+				this.sideRock13.render(f5);
+			if(stones >= 8)
+				this.sideRock15.render(f5);
+	    	
+			GL11.glDisable(GL11.GL_BLEND);
+			
+			GL11.glPopMatrix();
+    	}
     }
     
     public void renderStones2(float f5)
     {
-		GL11.glPushMatrix();
-		
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		Minecraft.getMinecraft().renderEngine.bindTexture(testStone);
-		GL11.glRotatef(95, 0, 5, 0);
-
-		this.sideRock2.render(f5);
-		this.sideRock4.render(f5);
-		this.sideRock6.render(f5);
-		this.sideRock8.render(f5);
-		this.sideRock10.render(f5);
-		this.sideRock12.render(f5);
-		this.sideRock14.render(f5);
-		this.sideRock16.render(f5);
-    	
-		GL11.glDisable(GL11.GL_BLEND);
-		
-		GL11.glPopMatrix();
+    	if(stones != 0)
+    	{
+			GL11.glPushMatrix();
+			
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			Minecraft.getMinecraft().renderEngine.bindTexture(testStone);
+			GL11.glRotatef(95, 0, 5, 0);
+	
+			if(stones >= 1)
+				this.sideRock2.render(f5);
+			if(stones >= 2)
+				this.sideRock4.render(f5);
+			if(stones >= 3)
+				this.sideRock6.render(f5);
+			if(stones >= 4)
+				this.sideRock8.render(f5);
+			if(stones >= 5)
+				this.sideRock10.render(f5);
+			if(stones >= 6)
+				this.sideRock12.render(f5);
+			if(stones >= 7)
+				this.sideRock14.render(f5);
+			if(stones >= 8)
+				this.sideRock16.render(f5);
+	    	
+			GL11.glDisable(GL11.GL_BLEND);
+			
+			GL11.glPopMatrix();
+    	}
     }
     
     public void renderJug(float f5)

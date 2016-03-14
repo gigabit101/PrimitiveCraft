@@ -144,7 +144,7 @@ public class TileCampfire extends TileEntity implements IInventory
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
 	{
-		if(itemstack.getItem() == Item.getItemFromBlock(Blocks.cobblestone) && i == this.rockSlotID)
+		if(itemstack.getItem() == Item.getItemFromBlock(ModBlocks.rock) && i == this.rockSlotID)
 		{
 			return true;
 		}
@@ -160,7 +160,7 @@ public class TileCampfire extends TileEntity implements IInventory
 		{
 			return true;
 		}
-		else if(itemstack.getItem() == ModItems.shale && i == this.fireSlodID && getStackInSlot(this.fireSlodID) == null)
+		else if(itemstack.getItem() == ModItems.shale && i == this.fireSlodID && getStackInSlot(this.fireSlodID) == null && getStackInSlot(rockSlotID) != null)
 		{
 			return true;
 		}

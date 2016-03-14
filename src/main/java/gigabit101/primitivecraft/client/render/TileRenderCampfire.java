@@ -36,8 +36,15 @@ public class TileRenderCampfire extends TileEntitySpecialRenderer
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-		modelCampfire.isActive = tm.getStackInSlot(tm.fireSlodID) != null;
-		
+		if(tm.getStackInSlot(tm.rockSlotID) != null)
+		{
+			modelCampfire.stones = tm.getStackInSlot(tm.rockSlotID).stackSize;
+		}
+		if(tm.getStackInSlot(tm.rockSlotID) == null)
+		{
+			modelCampfire.stones = 0;
+		}
+		modelCampfire.isActive = tm.getStackInSlot(tm.fireSlodID) != null;	
 		modelCampfire.hasSpit = tm.getStackInSlot(tm.spitSlotID) != null;
 		modelCampfire.hasJug = tm.getStackInSlot(tm.jugSlotID) != null;
 		modelCampfire.render(0.0625F);

@@ -2,9 +2,11 @@ package gigabit101.primitivecraft.compat.nei;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
+import gigabit101.primitivecraft.init.ModBlocks;
 import gigabit101.primitivecraft.lib.ModInfo;
+import net.minecraft.item.ItemStack;
 
-public class NEIConfigPrimativeCraft implements IConfigureNEI
+public class NEIConfig implements IConfigureNEI
 {
 	@Override
 	public String getName() 
@@ -24,6 +26,7 @@ public class NEIConfigPrimativeCraft implements IConfigureNEI
 		NEIGrinderRecipeHandler grinder = new NEIGrinderRecipeHandler();
 		API.registerUsageHandler(grinder);
 		API.registerRecipeHandler(grinder);
-//		API.registerRecipeHandler(new NEIGrinderRecipeHandler());	
+		
+//		API.hideItem(new ItemStack(ModBlocks.campfire));
 	}
 }

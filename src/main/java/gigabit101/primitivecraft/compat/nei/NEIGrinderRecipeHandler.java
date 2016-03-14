@@ -1,5 +1,6 @@
 package gigabit101.primitivecraft.compat.nei;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +10,11 @@ import codechicken.nei.recipe.TemplateRecipeHandler;
 import gigabit101.primitivecraft.api.PrimitiveCraftApi;
 import gigabit101.primitivecraft.api.recipe.RecipeGrinder;
 import gigabit101.primitivecraft.client.gui.GuiGrinder;
+import gigabit101.primitivecraft.lib.ModInfo;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
-import scala.Array;
 
 public class NEIGrinderRecipeHandler extends TemplateRecipeHandler
 {
@@ -27,21 +30,22 @@ public class NEIGrinderRecipeHandler extends TemplateRecipeHandler
 			if(recipe == null)
 				return;
 			
-//			inputs.add(new PositionedStack(new ItemStack(ModBlocks.pool, 1, recipe.getOutput().getItem() == Item.getItemFromBlock(ModBlocks.pool) ? 2 : 0), 71, 37));
-
 			if(recipe.getInput() instanceof String)
 			{
 				inputs.add(new PositionedStack(OreDictionary.getOres((String) recipe.getInput()), 42, 37));
 			}
 			else 
 			{
-				inputs.add(new PositionedStack(recipe.getInput(), 42, 37));
+				inputs.add(new PositionedStack(recipe.getInput(), 51, 23));
 			}
 
-			output1 = new PositionedStack(recipe.getOutput(), 101, 37);
-			output2 = new PositionedStack(recipe.getOutput2(), 101, 57);
+			output1 = new PositionedStack(recipe.getOutput(), 110, 23);
+			if(recipe.getOutput2() != null)
+			{
+				output2 = new PositionedStack(recipe.getOutput2(), 111, 49);
+			}
 
-			chance = 1/4;
+//			chance = 1/4;
 		}
 
 		
@@ -57,13 +61,19 @@ public class NEIGrinderRecipeHandler extends TemplateRecipeHandler
 		{
 			return output1;
 		}
+		
+		@Override
+		public PositionedStack getOtherStack() 
+		{
+			return output2;
+		}
 	}
 	
 	
 	@Override
 	public String getRecipeName() 
 	{
-		return "grinderrecipe";
+		return StatCollector.translateToLocal(ModInfo.MODID.toLowerCase() + ".grinderrecipe");
 	}
 
 	@Override
@@ -72,11 +82,16 @@ public class NEIGrinderRecipeHandler extends TemplateRecipeHandler
 		return "primitivecraft:textures/gui/grinder.png";
 	}
 	
+	@Override
+	public Class<? extends GuiContainer> getGuiClass() 
+	{
+		return GuiGrinder.class;
+	}
 
 	@Override
 	public void loadCraftingRecipes(String outputId, Object... results) 
 	{
-		if(outputId.equals("grinderrecipe")) 
+		if(outputId.equals(getRecipeName())) 
 		{
 			for(RecipeGrinder recipe : PrimitiveCraftApi.grinderRecipes) 
 			{
@@ -109,9 +124,14 @@ public class NEIGrinderRecipeHandler extends TemplateRecipeHandler
 			if(recipe == null)
 				continue;
 			CachedGrinderRecipe crecipe = new CachedGrinderRecipe(recipe);
-			if(crecipe.contains(crecipe.getIngredients(), ingredient) || crecipe.contains(crecipe.getOtherStacks(), ingredient))
+			if(crecipe.contains(crecipe.getIngredients(), ingredient)) //|| crecipe.contains(crecipe.getOtherStacks(), ingredient))
 				arecipes.add(crecipe);
 		}
 	}
-
+	
+    @Override
+    public void loadTransferRects()
+    {
+        transferRects.add(new RecipeTransferRect(new Rectangle(74, 28, 24, 16), getRecipeName()));
+    }
 }

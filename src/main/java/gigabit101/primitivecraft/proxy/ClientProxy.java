@@ -7,7 +7,7 @@ import gigabit101.primitivecraft.client.render.TileRenderCampfire;
 import gigabit101.primitivecraft.client.render.TileRenderJug;
 import gigabit101.primitivecraft.client.render.item.ItemRenderCampfire;
 import gigabit101.primitivecraft.client.render.item.ItemRenderJug;
-import gigabit101.primitivecraft.compat.nei.NEIConfigPrimativeCraft;
+import gigabit101.primitivecraft.compat.nei.NEIConfig;
 import gigabit101.primitivecraft.init.ModBlocks;
 import gigabit101.primitivecraft.lib.RenderIds;
 import gigabit101.primitivecraft.tile.TileCampfire;

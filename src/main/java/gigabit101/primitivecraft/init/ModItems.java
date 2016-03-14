@@ -11,7 +11,6 @@ import net.minecraft.item.Item;
 public class ModItems 
 {
 	public static Item shale;
-	public static Item campfirestone;
 	public static Item oredust;
 	public static Item twig;
 	
@@ -19,9 +18,6 @@ public class ModItems
 	{
 		shale = new ItemShale();
 		GameRegistry.registerItem(shale, "shale");
-		
-		campfirestone = new ItemCampfireStone();
-		GameRegistry.registerItem(campfirestone, "campfirestone");
 		
 		oredust = new ItemDust();
 		GameRegistry.registerItem(oredust, "dust");

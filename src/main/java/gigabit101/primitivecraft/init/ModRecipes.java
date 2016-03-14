@@ -36,6 +36,7 @@ public class ModRecipes
 	static void addGrinderRecipes()
 	{
 		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(Blocks.gravel), new ItemStack(Blocks.sand), new ItemStack(Blocks.cobblestone));
-		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(Blocks.sand), null, new ItemStack(Blocks.gravel));
+		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(Blocks.sand), null, new ItemStack(Blocks.gravel));     
+		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(ModItems.oredust), null, new ItemStack(Blocks.iron_ore));
 	}
 }

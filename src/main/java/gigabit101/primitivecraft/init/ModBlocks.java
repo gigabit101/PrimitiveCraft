@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import gigabit101.primitivecraft.blocks.BlockCampfire;
 import gigabit101.primitivecraft.blocks.BlockClayJug;
 import gigabit101.primitivecraft.blocks.BlockGrinder;
+import gigabit101.primitivecraft.blocks.BlockRock;
 import gigabit101.primitivecraft.blocks.BlockShale;
 import gigabit101.primitivecraft.tile.TileCampfire;
 import gigabit101.primitivecraft.tile.TileGrinder;
@@ -17,6 +18,7 @@ public class ModBlocks
 	public static Block hardjug;
 	public static Block grinder;
 	public static Block shale;
+	public static Block rock;
 	
 	public static void init()
 	{
@@ -34,5 +36,8 @@ public class ModBlocks
 		
 		shale = new BlockShale(Material.rock);
 		GameRegistry.registerBlock(shale, "shaleblock");
+		
+		rock = new BlockRock(Material.rock);
+		GameRegistry.registerBlock(rock, "rock");
 	}
 }

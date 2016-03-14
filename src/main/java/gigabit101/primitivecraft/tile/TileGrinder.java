@@ -139,9 +139,9 @@ public class TileGrinder extends TileBase implements IInventory
 			ItemStack input = getStackInSlot(this.input);
 			for (RecipeGrinder recipe : PrimitiveCraftApi.grinderRecipes) 
 			{
-				if (recipe.matches(input) || recipe.getOutput2().getItem() == Item.getItemFromBlock(getBlockType())) 
+				if(recipe.matches(input) || recipe.getOutput2() != null)
 				{
-					if(recipe.getOutput2() != null)
+					if (recipe.matches(input) || recipe.getOutput2().getItem() == Item.getItemFromBlock(getBlockType())) 
 					{
 						ItemStack output2 = recipe.getOutput2().copy();
 						return output2;
@@ -250,25 +250,19 @@ public class TileGrinder extends TileBase implements IInventory
 		 int progress = getProgress();
 		 int maxprogress = this.maxProgress;
 		 String name = "";
+		 String outputname = "";
 		 if(getStackInSlot(this.input) != null)
 		 {
 			 name = getStackInSlot(this.input).getDisplayName();
 		 }
-		// String name = "";
-		// if (getStackInSlot(1) != null && storedItem == null)
-		// {
-		// name = getStackInSlot(1).getDisplayName();
-		// size += getStackInSlot(1).stackSize;
-		// }
-		// if(getStackInSlot(1) != null && storedItem != null)
-		// {
-		// name = getStackInSlot(1).getDisplayName();
-		// size += getStackInSlot(1).stackSize + storedItem.stackSize;
-		// }
-		// if (storedItem != null)
+		 if(getOutput() != null)
+		 {
+			 outputname = getOutput().getDisplayName();
+		 }
 		 if(getStackInSlot(this.input) != null)
 		 {
 			 info.add("Input " + name);
+			 info.add("Output " + outputname);
 		 }
 
 		 info.add("Progress " + progress + "/" + maxprogress);

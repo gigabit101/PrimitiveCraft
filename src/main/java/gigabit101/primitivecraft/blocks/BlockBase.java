@@ -12,6 +12,7 @@ import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -20,7 +21,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidContainerItem;
+import net.minecraftforge.fluids.IFluidHandler;
 
 public class BlockBase extends BlockContainer
 {
@@ -178,5 +184,139 @@ public class BlockBase extends BlockContainer
         ArrayList<ItemStack> items = new ArrayList<ItemStack>();
         items.add(new ItemStack(this));
         return items;
+    }
+    
+    //Fluid handler copied from TechReborn
+    public boolean fillBlockWithFluid(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ) 
+    {
+        ItemStack current = entityplayer.inventory.getCurrentItem();
+
+        if (current != null) 
+        {
+            TileEntity tile = world.getTileEntity(x, y, z);
+            if (tile instanceof IFluidHandler) 
+            {
+                IFluidHandler tank = (IFluidHandler) tile;
+                // Handle FluidContainerRegistry
+                if (FluidContainerRegistry.isContainer(current)) 
+                {
+                    FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(current);
+                    // Handle filled containers
+                    if (liquid != null) 
+                    {
+                        int qty = tank.fill(ForgeDirection.UNKNOWN, liquid, true);
+                        if (qty != 0 && !entityplayer.capabilities.isCreativeMode) 
+                        {
+                            if (current.stackSize > 1) 
+                            {
+                                if (!entityplayer.inventory.addItemStackToInventory(FluidContainerRegistry.drainFluidContainer(current))) 
+                                {
+                                    entityplayer.dropPlayerItemWithRandomChoice(FluidContainerRegistry.drainFluidContainer(current), false);
+                                }
+                                entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, consumeItem(current));
+                            } 
+                            else 
+                            {
+                                entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, FluidContainerRegistry.drainFluidContainer(current));
+                            }
+                        }
+                        return true;
+                        // Handle empty containers
+                    } 
+                    else 
+                    {
+                        FluidStack available = tank.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
+
+                        if (available != null) 
+                        {
+                            ItemStack filled = FluidContainerRegistry.fillFluidContainer(available, current);
+
+                            liquid = FluidContainerRegistry.getFluidForFilledItem(filled);
+
+                            if (liquid != null) 
+                            {
+                                if (!entityplayer.capabilities.isCreativeMode) 
+                                {
+                                    if (current.stackSize > 1) 
+                                    {
+                                        if (!entityplayer.inventory.addItemStackToInventory(filled)) 
+                                        {
+                                            return false;
+                                        } 
+                                        else 
+                                        {
+                                            entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, consumeItem(current));
+                                        }
+                                    } 
+                                    else 
+                                    {
+                                        entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, consumeItem(current));
+                                        entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, filled);
+                                    }
+                                }
+                                tank.drain(ForgeDirection.UNKNOWN, liquid.amount, true);
+                                return true;
+                            }
+                        }
+                    }
+                }
+                else if (current.getItem() instanceof IFluidContainerItem) 
+                {
+                    if (current.stackSize != 1) 
+                    {
+                        return false;
+                    }
+
+                    if (!world.isRemote) 
+                    {
+                        IFluidContainerItem container = (IFluidContainerItem) current.getItem();
+                        FluidStack liquid = container.getFluid(current);
+                        FluidStack tankLiquid = tank.getTankInfo(ForgeDirection.UNKNOWN)[0].fluid;
+                        boolean mustDrain = liquid == null || liquid.amount == 0;
+                        boolean mustFill = tankLiquid == null || tankLiquid.amount == 0;
+                        if (mustDrain && mustFill) 
+                        {
+                            // Both are empty, do nothing
+                        } 
+                        else if (mustDrain || !entityplayer.isSneaking()) 
+                        {
+                            liquid = tank.drain(ForgeDirection.UNKNOWN, 1000, false);
+                            int qtyToFill = container.fill(current, liquid, true);
+                            tank.drain(ForgeDirection.UNKNOWN, qtyToFill, true);
+                        } 
+                        else if (mustFill || entityplayer.isSneaking()) 
+                        {
+                            if (liquid.amount > 0) 
+                            {
+                                int qty = tank.fill(ForgeDirection.UNKNOWN, liquid, false);
+                                tank.fill(ForgeDirection.UNKNOWN, container.drain(current, qty, true), true);
+                            }
+                        }
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public static ItemStack consumeItem(ItemStack stack) 
+    {
+        if (stack.stackSize == 1) 
+        {
+            if (stack.getItem().hasContainerItem(stack)) 
+            {
+                return stack.getItem().getContainerItem(stack);
+            } 
+            else 
+            {
+                return null;
+            }
+        } 
+        else 
+        {
+            stack.splitStack(1);
+            return stack;
+        }
     }
 }

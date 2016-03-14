@@ -1,7 +1,20 @@
 package gigabit101.primitivecraft.client.render;
 
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
 public class ModelJug extends ModelBase
 {
@@ -10,6 +23,9 @@ public class ModelJug extends ModelBase
     public ModelRenderer side2;
     public ModelRenderer side3;
     public ModelRenderer side4;
+    public ModelRenderer fluid;
+    public boolean hasFluid;
+    public FluidStack fluidstack;
 
     public ModelJug() 
     {
@@ -34,15 +50,56 @@ public class ModelJug extends ModelBase
         this.base = new ModelRenderer(this, 0, 0);
         this.base.setRotationPoint(0.0F, 23.0F, 0.0F);
         this.base.addBox(-6.0F, -1.0F, -6.0F, 12, 2, 12, 0.0F);
+        this.fluid = new ModelRenderer(this, 0, 0);
+        this.fluid.setRotationPoint(0.0F, 23.0F, 0.0F);
+        this.fluid.addBox(-4.0F, -8.0F, -4.0F, 8, 2, 8, 0.0F);
     }
+	public static final ResourceLocation testNothing = new ResourceLocation("minecraft", "textures/blocks/hardened_clay_stained_brown.png");
 
     public void render(float f5) 
     { 
+    	renderJug(f5);
+        if(hasFluid)
+        {
+        	renderFluid(f5);
+        }
+    }
+    
+    public void renderJug(float f5)
+    {
+		Minecraft.getMinecraft().renderEngine.bindTexture(testNothing);
         this.side1.render(f5);
         this.side3.render(f5);
         this.side4.render(f5);
         this.side2.render(f5);
         this.base.render(f5);
+    }
+    
+    public void renderFluid(float f5)
+    {
+    	if(hasFluid)
+    	{
+    		GL11.glPushMatrix();
+    		GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
+    		GL11.glEnable(GL11.GL_CULL_FACE);
+    		GL11.glDisable(GL11.GL_LIGHTING);
+    		GL11.glEnable(GL11.GL_BLEND);
+    		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+    		float scale = 0.5F;
+    		GL11.glScalef(scale, scale, scale);
+    		GL11.glTranslatef(0f, 2.0F, 0f);
+
+    		Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
+	        
+	    	RenderBlocks renderBlocks = RenderBlocks.getInstance();
+	        renderBlocks.setOverrideBlockTexture(fluidstack.getFluid().getStillIcon());
+	        renderBlocks.renderBlockAsItem(Blocks.stone, 0, 1.0f);
+
+	        renderBlocks.clearOverrideBlockTexture();
+			
+			GL11.glPopAttrib();
+			GL11.glPopMatrix();
+    	}
     }
 
     /**

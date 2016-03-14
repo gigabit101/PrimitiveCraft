@@ -12,7 +12,7 @@ public class BlockRock extends BlockBase
 		super(material);
 		setBlockName("rock");
 		float f = 0.2F;
-		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
+		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 1.0F, 0.5F + f);
 	}
 	
 	@Override

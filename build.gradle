@@ -17,9 +17,24 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.1.6"
-group= "com.gigabit101.talismans2" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "Talismans2"
+repositories {
+    maven {
+        name = "Modmuss50"
+        url = "http://maven.modmuss50.me/"
+    }
+        maven {
+        name "Mobius Repo"
+        url "http://mobiusstrip.eu/maven"
+    }
+    maven {
+        name 'CB Repo'
+        url "http://chickenbones.net/maven/"
+    }
+}
+
+version = "alpha1"
+group= "com.gigabit101.primitivecraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "PrimitiveCraft"
 
 def grabDep(name, url){
 	ant.get(src: url, dest: 'dep')
@@ -27,42 +42,16 @@ def grabDep(name, url){
 }
 
 dependencies {
-    def f = new File('dep/')
-    if(f.exists()){
-        f.delete()
+    compile 'RebornCore:RebornCore:1.1.0.+:dev'
+    compile "codechicken:NotEnoughItems:1.7.10-1.0.5.+:dev"
+        compile ("mcp.mobius.waila:Waila:1.5.10_1.7.10:dev") {
+        exclude group: 'mcp.mobius.waila'
     }
-    f.mkdirs()
-    if(!f.exists()){
-        f.mkdir()
-    }
-	println("  Downloading dependencies!")
-	grabDep('gbl', 'https://dl.dropboxusercontent.com/u/47135879/Baubles-deobf-1.7.10-1.0.1.4.jar')
-	grabDep('gbt', 'https://dl.dropboxusercontent.com/u/47135879/Thaumcraft-1.7.10-4.2.0.1.jar')
-    grabDep('gbb', 'http://addons.cursecdn.com/files/2224/758/BloodMagic-1.7.10-1.3.0b-3.jar')
-    grabDep('gbd', 'http://vazkii.us/mod/Botania/files/Botania%20r1.2-120.jar')
-    
-
-
-	println("  Adding dependencies!")
-    compile files("dep/gbl.jar")
-     compile files("dep/gbt.jar")
-	 compile files("dep/gbb.jar")
-	 compile files("dep/gbd.jar")
-	println("  Finished adding dependencies!")
 }
 
 minecraft {
     version = "1.7.10-10.13.0.1200"
     assetDir = "eclipse/assets"
-}
-
-dependencies {
-	compile files (
-		'Baubles-deobf.jar',
-		'Thaumcraft.jar',
-		'Blood.jar',
-		'Botania.jar'
-	)
 }
 
 processResources

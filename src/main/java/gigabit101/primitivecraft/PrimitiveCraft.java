@@ -57,7 +57,7 @@ public class PrimitiveCraft
 		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
 		//Register Mod Compat
 		CompatHandler.init(event);
-		
+		//Register Leave drops
 		MinecraftForge.EVENT_BUS.register(EventDrops.instancemain);
 	}
 }

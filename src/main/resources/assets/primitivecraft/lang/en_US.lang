@@ -1,3 +1,16 @@
 tile.grinder.name=Dynamic Grinder
+tile.campfire.name=Campfire
+tile.clayjug.name=Jug
+tile.shaleblock.name=Shale Block
+tile.rock.name=Rock
+
+item.shale.name=Shale
+item.primitivecraft.dust.iron.name=Iron Dust
+item.primitivecraft.dust.gold.name=Gold Dust
+item.primitivecraft.dust.copper.name=Copper Dust
+item.primitivecraft.dust.tin.name=Tin Dust
+item.primitivecraft.dust.silver.name=Silver Dust
+item.primitivecraft.dust.lead.name=Lead Dust
+item.twig.name=Twig
 
 primitivecraft.grinderrecipe=Grinder Recipe

@@ -14,6 +14,7 @@ public class ConfigPrimitiveCraft
 	public static boolean enableGrinder;
 	public static boolean snowballsStack64;
 	public static boolean genrocks;
+	public static boolean genshale;
 	
 	public static Configuration config;
 	
@@ -57,6 +58,8 @@ public class ConfigPrimitiveCraft
         //World
         genrocks = config.get(CATEGORY_WORLD,"Enable Rocks Worldgen",
                 true,"set to false to disable rocks from generating").getBoolean();
+        genshale = config.get(CATEGORY_WORLD,"Enable Shale Worldgen",
+                true,"set to false to disable shale from generating").getBoolean();
         //Tweaks
         snowballsStack64 = config.get(CATEGORY_TWEAKS,"Enable Snowballs to stack to 64",
                 false,"set to false to remove recipe from the grinder").getBoolean();

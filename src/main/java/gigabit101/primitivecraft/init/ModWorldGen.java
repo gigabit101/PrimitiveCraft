@@ -8,10 +8,7 @@ public class ModWorldGen
 {
 	public static void init()
 	{
-		if(ConfigPrimitiveCraft.genrocks)
-		{
-			//Register Rock World gen
-			MinecraftForge.TERRAIN_GEN_BUS.register(WorldGenStones.instancemain);
-		}
+		//Register Rock World gen
+		MinecraftForge.TERRAIN_GEN_BUS.register(WorldGenStones.instancemain);
 	}
 }

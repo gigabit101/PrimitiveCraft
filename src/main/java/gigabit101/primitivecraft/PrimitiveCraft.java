@@ -2,6 +2,7 @@ package gigabit101.primitivecraft;
 
 import java.io.File;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -11,14 +12,17 @@ import gigabit101.primitivecraft.api.PrimitiveCraftApi;
 import gigabit101.primitivecraft.client.GuiHandler;
 import gigabit101.primitivecraft.compat.CompatHandler;
 import gigabit101.primitivecraft.config.ConfigPrimitiveCraft;
+import gigabit101.primitivecraft.event.EventDrops;
 import gigabit101.primitivecraft.init.ModBlocks;
 import gigabit101.primitivecraft.init.ModItems;
 import gigabit101.primitivecraft.init.ModRecipes;
 import gigabit101.primitivecraft.lib.ModInfo;
 import gigabit101.primitivecraft.proxy.CommonProxy;
+import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(name = ModInfo.MODNAME, modid = ModInfo.MODID, version = ModInfo.MODVERSION)
 public class PrimitiveCraft 
@@ -53,5 +57,7 @@ public class PrimitiveCraft
 		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
 		//Register Mod Compat
 		CompatHandler.init(event);
+		
+		MinecraftForge.EVENT_BUS.register(EventDrops.instancemain);
 	}
 }

@@ -5,6 +5,7 @@ import gigabit101.primitivecraft.items.ItemCampfireStone;
 import gigabit101.primitivecraft.items.ItemClayJug;
 import gigabit101.primitivecraft.items.ItemDust;
 import gigabit101.primitivecraft.items.ItemShale;
+import gigabit101.primitivecraft.items.ItemTwig;
 import net.minecraft.item.Item;
 
 public class ModItems 
@@ -12,6 +13,7 @@ public class ModItems
 	public static Item shale;
 	public static Item campfirestone;
 	public static Item oredust;
+	public static Item twig;
 	
 	public static void init()
 	{
@@ -23,5 +25,8 @@ public class ModItems
 		
 		oredust = new ItemDust();
 		GameRegistry.registerItem(oredust, "dust");
+		
+		twig = new ItemTwig();
+		GameRegistry.registerItem(twig, "twig");
 	}
 }

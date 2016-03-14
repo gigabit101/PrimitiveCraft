@@ -41,5 +41,7 @@ public class ModRecipes
 		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(ModItems.oredust, 2), null, new ItemStack(Blocks.iron_ore));
 		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(ModItems.oredust, 2, 1), null, new ItemStack(Blocks.gold_ore));
 		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(Items.string, 4), null, new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE));
+		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(ModItems.oredust), null, new ItemStack(Items.iron_ingot));
+		PrimitiveCraftApi.registerGrinderRecipe(new ItemStack(ModItems.oredust), null, new ItemStack(Items.gold_ingot));
 	}
 }

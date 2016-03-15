@@ -2,6 +2,7 @@ package gigabit101.primitivecraft;
 
 import java.io.File;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -62,6 +63,7 @@ public class PrimitiveCraft
 	@Mod.EventHandler
 	public void postinit(FMLInitializationEvent event)
 	{
-		MinetweakerCompat.init();
+		if(Loader.isModLoaded("MineTweaker3"))
+			MinetweakerCompat.init();
 	}
 }

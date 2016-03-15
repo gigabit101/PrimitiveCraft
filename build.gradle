@@ -51,7 +51,7 @@ dependencies {
         compile ("mcp.mobius.waila:Waila:1.5.10_1.7.10:dev") {
         exclude group: 'mcp.mobius.waila'
     }
-    compile name: "MineTweaker3", version: "1.7.10-3.0.9C", classifier: "Dev"  
+    compile name: "MineTweaker3", version: "1.7.10-3.0.9C" 
 }
 
 minecraft {

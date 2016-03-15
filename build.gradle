@@ -30,6 +30,10 @@ repositories {
         name 'CB Repo'
         url "http://chickenbones.net/maven/"
     }
+    maven {
+        name "MineTweaker3"
+        artifactPattern "http://minetweaker3.powerofbytes.com/download/[module]-[classifier]-[revision].[ext]"
+    }
 }
 
 version = "alpha1"
@@ -47,6 +51,7 @@ dependencies {
         compile ("mcp.mobius.waila:Waila:1.5.10_1.7.10:dev") {
         exclude group: 'mcp.mobius.waila'
     }
+    compile name: "MineTweaker3", version: "1.7.10-3.0.9C", classifier: "Dev"  
 }
 
 minecraft {

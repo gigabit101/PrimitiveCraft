@@ -54,9 +54,15 @@ public class BlockCampfire extends BlockBase
 				return true;
 			}
 		}
+        if(player.isSneaking() && player.getCurrentEquippedItem() == null)
+        {
+        	player.setCurrentItemOrArmor(0, tile.removetank());
+        	return true;
+        }
 		//DEBUG
-//		if(player.isSneaking() && !world.isRemote)
-//		{
+		if(player.isSneaking() && !world.isRemote)
+		{
+			player.addChatComponentMessage(new ChatComponentText("message deleted for using a banned word"));
 //			if(tile.getStackInSlot(0) != null)
 //				player.addChatComponentMessage(new ChatComponentText("0 " + tile.getStackInSlot(0).getDisplayName() + " " + tile.getStackInSlot(0).stackSize));
 //			if(tile.getStackInSlot(1) != null)
@@ -67,7 +73,7 @@ public class BlockCampfire extends BlockBase
 //				player.addChatComponentMessage(new ChatComponentText("3 " + tile.getStackInSlot(3).getDisplayName() + " " + tile.getStackInSlot(3).stackSize));
 //			if(tile.getStackInSlot(4) != null)
 //				player.addChatComponentMessage(new ChatComponentText("4 " + tile.getStackInSlot(4).getDisplayName() + " " + tile.getStackInSlot(4).stackSize));
-//		}
+		}
 		return false;
 	}
 	

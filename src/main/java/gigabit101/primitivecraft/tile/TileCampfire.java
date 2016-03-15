@@ -27,13 +27,13 @@ import reborncore.common.util.Tank;
 public class TileCampfire extends TileBase implements IInventory, IFluidHandler
 {	
 	public Inventory inventory = new Inventory(5, "TileCampfire", 8);
-	public Tank tank = new Tank("tilecampfirejug", 1000, this);
+	public Tank tank = new Tank("tilehardjug", 1000, this);
 
 	public int rockSlotID = 0;
-	public int stickSlotID = 1;
-	public int jugSlotID = 2;
-	public int spitSlotID = 3;
-	public int fireSlodID = 4;
+	public int jugSlotID = 1;
+	public int spitSlotID = 2;
+	public int fireSlodID = 3;
+	public int inputSlotID = 4;
 	public boolean hasFire;
 	
 	@Override
@@ -51,14 +51,55 @@ public class TileCampfire extends TileBase implements IInventory, IFluidHandler
 	
 	public boolean isActive()
 	{
-		if(getStackInSlot(rockSlotID) != null && getStackInSlot(stickSlotID) != null && getStackInSlot(fireSlodID) != null)
+		if(getStackInSlot(rockSlotID) != null && getStackInSlot(fireSlodID) != null)
 		{
-			if(getStackInSlot(rockSlotID).stackSize == 8 && getStackInSlot(stickSlotID).stackSize == 8 && getStackInSlot(fireSlodID).stackSize == 1)
+			if(getStackInSlot(rockSlotID).stackSize == 8 && getStackInSlot(fireSlodID).stackSize == 1)
 			{
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	public ItemStack removetank()
+	{
+		if(getStackInSlot(jugSlotID) != null)
+		{
+			if(tank.getFluid() == null)
+			{
+				setInventorySlotContents(jugSlotID, null);
+				return new ItemStack(ModBlocks.hardjug);
+			}
+			else if(tank.getFluid() != null)
+			{
+				setInventorySlotContents(jugSlotID, null);
+				ItemStack stack = getDropWithNBT();
+				tank.setFluid(null);
+				return stack;
+			}
+		}
+		return null;
+	}
+	
+	public void writeToNBTWithoutCoords(NBTTagCompound tagCompound) 
+	{
+		tank.writeToNBT(tagCompound);
+		//For tooltip
+		if (tank.getFluid() != null) 
+		{
+			tagCompound.setInteger("storedQuantity", tank.getFluidAmount());
+			tagCompound.setString("storedFluid", tank.getFluid().getLocalizedName());
+		} 
+	}
+	
+	public ItemStack getDropWithNBT() 
+	{
+		NBTTagCompound tileEntity = new NBTTagCompound();
+		ItemStack dropStack = new ItemStack(ModBlocks.hardjug, 1);
+		writeToNBTWithoutCoords(tileEntity);
+		dropStack.setTagCompound(new NBTTagCompound());
+		dropStack.stackTagCompound.setTag("tileEntity", tileEntity);
+		return dropStack;
 	}
 	
 	@Override
@@ -164,15 +205,16 @@ public class TileCampfire extends TileBase implements IInventory, IFluidHandler
 		{
 			return true;
 		}
-		else if(itemstack.getItem() == Items.stick && i == this.stickSlotID)
+		else if(itemstack.getItem() == Items.stick && i == this.inputSlotID && getStackInSlot(jugSlotID) != null)
 		{
 			return true;
 		}
+		//TODO
 		else if(itemstack.getItem() == Items.apple && i == this.spitSlotID)
 		{
 			return true;
 		}
-		else if(itemstack.getItem() == Item.getItemFromBlock(ModBlocks.hardjug) && i == this.jugSlotID)
+		else if(itemstack.getItem() == Item.getItemFromBlock(ModBlocks.hardjug) && i == this.jugSlotID && getStackInSlot(this.jugSlotID).stackSize <= 1)
 		{
 			return true;
 		}

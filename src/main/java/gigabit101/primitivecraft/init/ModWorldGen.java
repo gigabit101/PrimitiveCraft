@@ -1,6 +1,5 @@
 package gigabit101.primitivecraft.init;
 
-import gigabit101.primitivecraft.config.ConfigPrimitiveCraft;
 import gigabit101.primitivecraft.world.WorldGenStones;
 import net.minecraftforge.common.MinecraftForge;
 

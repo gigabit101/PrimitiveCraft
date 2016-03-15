@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import gigabit101.primitivecraft.client.render.ModelCampfire;
-import gigabit101.primitivecraft.client.render.ModelJug;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;

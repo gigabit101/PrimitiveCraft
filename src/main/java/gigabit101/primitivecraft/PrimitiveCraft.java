@@ -2,13 +2,11 @@ package gigabit101.primitivecraft;
 
 import java.io.File;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import gigabit101.primitivecraft.api.PrimitiveCraftApi;
 import gigabit101.primitivecraft.client.GuiHandler;
 import gigabit101.primitivecraft.compat.CompatHandler;
 import gigabit101.primitivecraft.config.ConfigPrimitiveCraft;
@@ -19,11 +17,6 @@ import gigabit101.primitivecraft.init.ModRecipes;
 import gigabit101.primitivecraft.init.ModWorldGen;
 import gigabit101.primitivecraft.lib.ModInfo;
 import gigabit101.primitivecraft.proxy.CommonProxy;
-import gigabit101.primitivecraft.world.WorldGenStones;
-import net.minecraft.block.BlockLeavesBase;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
 @Mod(name = ModInfo.MODNAME, modid = ModInfo.MODID, version = ModInfo.MODVERSION, dependencies = ModInfo.MOD_DEPENDENCUIES)

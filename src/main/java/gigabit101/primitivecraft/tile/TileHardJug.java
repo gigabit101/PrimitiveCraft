@@ -49,6 +49,12 @@ public class TileHardJug extends TileBase implements IFluidHandler
 	public void writeToNBTWithoutCoords(NBTTagCompound tagCompound) 
 	{
 		tank.writeToNBT(tagCompound);
+		//For tooltip
+		if (tank.getFluid() != null) 
+		{
+			tagCompound.setInteger("storedQuantity", tank.getFluidAmount());
+			tagCompound.setString("storedFluid", tank.getFluid().getLocalizedName());
+		} 
 	}
 
 	public Packet getDescriptionPacket() 

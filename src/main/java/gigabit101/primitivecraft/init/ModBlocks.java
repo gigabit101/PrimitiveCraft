@@ -6,6 +6,7 @@ import gigabit101.primitivecraft.blocks.BlockClayJug;
 import gigabit101.primitivecraft.blocks.BlockGrinder;
 import gigabit101.primitivecraft.blocks.BlockRock;
 import gigabit101.primitivecraft.blocks.BlockShale;
+import gigabit101.primitivecraft.items.itemblock.ItemBlockJug;
 import gigabit101.primitivecraft.tile.TileCampfire;
 import gigabit101.primitivecraft.tile.TileGrinder;
 import gigabit101.primitivecraft.tile.TileHardJug;
@@ -27,7 +28,7 @@ public class ModBlocks
 		GameRegistry.registerTileEntity(TileCampfire.class, "campfirePC");
 		
 		hardjug = new BlockClayJug(Material.rock);
-		GameRegistry.registerBlock(hardjug, "hardjug");
+		GameRegistry.registerBlock(hardjug, ItemBlockJug.class, "hardjug");
 		GameRegistry.registerTileEntity(TileHardJug.class, "hardjugPC");
 		
 		grinder = new BlockGrinder(Material.rock);

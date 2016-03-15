@@ -2,7 +2,6 @@ package gigabit101.primitivecraft.client.render;
 
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.block.BlockFire;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -10,6 +9,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.FluidStack;
 
 public class ModelCampfire extends ModelBase
 {
@@ -57,7 +57,8 @@ public class ModelCampfire extends ModelBase
     public boolean hasJug;
     public int sticks;
     public int stones;
-    public int meta;
+    public boolean hasFluid;
+    public FluidStack fluidstack;
 
     public ModelCampfire() {
         this.textureWidth = 32;
@@ -207,6 +208,7 @@ public class ModelCampfire extends ModelBase
     	renderStones1(f5);
     	renderStones2(f5);
     	renderFire(f5);
+    	renderFluid(f5);
     }
 
     /**
@@ -248,6 +250,7 @@ public class ModelCampfire extends ModelBase
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			Minecraft.getMinecraft().renderEngine.bindTexture(testStone);
+		
 			if(stones >= 1)
 				this.sideRock1.render(f5);
 			if(stones >= 2)
@@ -376,6 +379,33 @@ public class ModelCampfire extends ModelBase
 	        renderBlocks.clearOverrideBlockTexture();
 			
 			GL11.glDisable(GL11.GL_BLEND);
+			GL11.glPopMatrix();
+    	}
+    }
+    
+    public void renderFluid(float f5)
+    {
+    	if(hasFluid && hasJug)
+    	{
+    		GL11.glPushMatrix();
+    		GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
+    		GL11.glEnable(GL11.GL_CULL_FACE);
+    		GL11.glDisable(GL11.GL_LIGHTING);
+    		GL11.glEnable(GL11.GL_BLEND);
+    		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+    		float scale = 0.5F;
+    		GL11.glScalef(scale, scale, scale);
+    		GL11.glTranslatef(0f, 2.0F, 0f);
+
+    		Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
+	        
+	    	RenderBlocks renderBlocks = RenderBlocks.getInstance();
+	        renderBlocks.setOverrideBlockTexture(fluidstack.getFluid().getStillIcon());
+	        renderBlocks.renderBlockAsItem(Blocks.stone, 0, 1.0f);
+
+	        renderBlocks.clearOverrideBlockTexture();
+			
+			GL11.glPopAttrib();
 			GL11.glPopMatrix();
     	}
     }

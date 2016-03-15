@@ -2,14 +2,9 @@ package gigabit101.primitivecraft.client.render;
 
 import org.lwjgl.opengl.GL11;
 
-import gigabit101.primitivecraft.tile.TileCampfire;
 import gigabit101.primitivecraft.tile.TileHardJug;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 
 public class TileRenderJug extends TileEntitySpecialRenderer
 {	

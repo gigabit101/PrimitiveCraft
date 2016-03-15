@@ -7,18 +7,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gigabit101.primitivecraft.api.PrimitiveCraftApi;
 import gigabit101.primitivecraft.api.VanillaPacketDispatcher;
 import gigabit101.primitivecraft.api.recipe.RecipeGrinder;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import reborncore.common.util.Inventory;
 import reborncore.common.util.ItemUtils;
-import scala.xml.persistent.SetStorage;
 
 public class TileGrinder extends TileBase implements IInventory
 {

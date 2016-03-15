@@ -3,18 +3,8 @@ package gigabit101.primitivecraft.client.render;
 import org.lwjgl.opengl.GL11;
 
 import gigabit101.primitivecraft.tile.TileCampfire;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFire;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.IBlockAccess;
 
 public class TileRenderCampfire extends TileEntitySpecialRenderer
 {
@@ -47,6 +37,11 @@ public class TileRenderCampfire extends TileEntitySpecialRenderer
 		modelCampfire.isActive = tm.getStackInSlot(tm.fireSlodID) != null;	
 		modelCampfire.hasSpit = tm.getStackInSlot(tm.spitSlotID) != null;
 		modelCampfire.hasJug = tm.getStackInSlot(tm.jugSlotID) != null;
+		modelCampfire.hasFluid = tm.tank.getFluid() != null;
+		if(tm.tank.getFluid() != null)
+		{	
+			modelCampfire.fluidstack = tm.tank.getFluid();
+		}
 		modelCampfire.render(0.0625F);
 		
 		GL11.glDisable(GL11.GL_BLEND);

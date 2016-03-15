@@ -5,11 +5,9 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import gigabit101.primitivecraft.config.ConfigPrimitiveCraft;
 import gigabit101.primitivecraft.init.ModBlocks;
-import net.minecraft.block.BlockWall;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType;
-import net.minecraftforge.fluids.BlockFluidBase;
 
 public class WorldGenStones 
 {

@@ -1,8 +1,6 @@
 package gigabit101.primitivecraft.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import gigabit101.primitivecraft.items.ItemCampfireStone;
-import gigabit101.primitivecraft.items.ItemClayJug;
 import gigabit101.primitivecraft.items.ItemDust;
 import gigabit101.primitivecraft.items.ItemShale;
 import gigabit101.primitivecraft.items.ItemTwig;

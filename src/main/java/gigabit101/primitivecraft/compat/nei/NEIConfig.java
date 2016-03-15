@@ -2,9 +2,7 @@ package gigabit101.primitivecraft.compat.nei;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
-import gigabit101.primitivecraft.init.ModBlocks;
 import gigabit101.primitivecraft.lib.ModInfo;
-import net.minecraft.item.ItemStack;
 
 public class NEIConfig implements IConfigureNEI
 {

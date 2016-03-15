@@ -6,8 +6,6 @@ import gigabit101.primitivecraft.PrimitiveCraft;
 import gigabit101.primitivecraft.api.VanillaPacketDispatcher;
 import gigabit101.primitivecraft.client.GuiHandler;
 import gigabit101.primitivecraft.tile.TileGrinder;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;

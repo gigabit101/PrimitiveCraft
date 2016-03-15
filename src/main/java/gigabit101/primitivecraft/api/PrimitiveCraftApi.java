@@ -16,4 +16,12 @@ public class PrimitiveCraftApi
 		grinderRecipes.add(recipe);
 		return recipe;
 	}
+	
+	public static void removeRecipe(Object input)
+	{
+		if(grinderRecipes.contains(input))
+		{
+			grinderRecipes.remove(input);
+		}
+	}
 }

@@ -2,6 +2,8 @@ package gigabit101.primitivecraft.api.recipe;
 
 import java.util.List;
 
+import gigabit101.primitivecraft.api.PrimitiveCraftApi;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -48,6 +50,38 @@ public class RecipeGrinder
 			}
 		}
 		return false;
+	}
+	
+	public static ItemStack getOutputFrom(ItemStack input)
+	{
+		if(input != null)
+		{
+			for (RecipeGrinder recipe : PrimitiveCraftApi.grinderRecipes) 
+			{
+				if (recipe.matches(input)) //|| recipe.getOutput().getItem() == Item.getItemFromBlock(getBlockType())) 
+				{
+					ItemStack output = recipe.getOutput().copy();
+					return output;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public static ItemStack getOutput2From(ItemStack input)
+	{
+		if(input != null)
+		{
+			for (RecipeGrinder recipe : PrimitiveCraftApi.grinderRecipes) 
+			{
+				if (recipe.matches(input))// || recipe.getOutput2().getItem() == Item.getItemFromBlock(getBlockType())) 
+				{
+					ItemStack output = recipe.getOutput().copy();
+					return output;
+				}
+			}
+		}
+		return null;
 	}
 	
 	public Object getInput() 

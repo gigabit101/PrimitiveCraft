@@ -9,6 +9,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import gigabit101.primitivecraft.client.GuiHandler;
 import gigabit101.primitivecraft.compat.CompatHandler;
+import gigabit101.primitivecraft.compat.minetweaker.MinetweakerCompat;
 import gigabit101.primitivecraft.config.ConfigPrimitiveCraft;
 import gigabit101.primitivecraft.event.EventDrops;
 import gigabit101.primitivecraft.init.ModBlocks;
@@ -56,5 +57,11 @@ public class PrimitiveCraft
 		MinecraftForge.EVENT_BUS.register(EventDrops.instancemain);
 		//Register Mod World Gen
 		ModWorldGen.init();
+	}
+	
+	@Mod.EventHandler
+	public void postinit(FMLInitializationEvent event)
+	{
+		MinetweakerCompat.init();
 	}
 }

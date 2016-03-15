@@ -210,11 +210,11 @@ public class TileCampfire extends TileBase implements IInventory, IFluidHandler
 			return true;
 		}
 		//TODO
-		else if(itemstack.getItem() == Items.apple && i == this.spitSlotID)
+		else if(itemstack.getItem() == Items.apple && i == this.spitSlotID && getStackInSlot(this.spitSlotID) == null)
 		{
 			return true;
 		}
-		else if(itemstack.getItem() == Item.getItemFromBlock(ModBlocks.hardjug) && i == this.jugSlotID && getStackInSlot(this.jugSlotID).stackSize <= 1)
+		else if(itemstack.getItem() == Item.getItemFromBlock(ModBlocks.hardjug) && i == this.jugSlotID && getStackInSlot(this.jugSlotID) == null)
 		{
 			return true;
 		}

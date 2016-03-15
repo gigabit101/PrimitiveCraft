@@ -30,10 +30,6 @@ repositories {
         name 'CB Repo'
         url "http://chickenbones.net/maven/"
     }
-    ivy {
-        name "MineTweaker3"
-        artifactPattern "http://minetweaker3.powerofbytes.com/download/[module]-[classifier]-[revision].[ext]"
-    }
 }
 
 version = "alpha1"
@@ -46,12 +42,22 @@ def grabDep(name, url){
 }
 
 dependencies {
+    def f = new File('dep/')
+    if(f.exists()){
+        f.delete()
+    }
+    f.mkdirs()
+    if(!f.exists()){
+        f.mkdir()
+    }
+    grabDep('mct', 'http://minetweaker3.powerofbytes.com/download/MineTweaker3-Dev-1.7.10-3.0.9.jar')
+    compile files("dep/mct.jar")
+    
     compile 'RebornCore:RebornCore:1.1.0.+:dev'
     compile "codechicken:NotEnoughItems:1.7.10-1.0.5.+:dev"
         compile ("mcp.mobius.waila:Waila:1.5.10_1.7.10:dev") {
         exclude group: 'mcp.mobius.waila'
     }
-    compile name: "MineTweaker3", version: "1.7.10-3.0.9C" 
 }
 
 minecraft {
